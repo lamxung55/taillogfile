@@ -1,0 +1,12 @@
+[
+  {
+    "name": "disconnect",
+    "level": "error",
+    "pattern": "Cannot Connect"
+  },
+  {
+    "name": "bindown",
+    "level": "info",
+    "pattern": "bin down 900"
+  }
+]

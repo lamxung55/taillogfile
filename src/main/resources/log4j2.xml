@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Properties>
+        <Property name="log-name">monitor</Property>
+    </Properties>
+
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--
+            <PatternLayout
+                    pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable" />
+                    -->
+            <PatternLayout pattern="%d{DEFAULT} %5p [%C{1}] [%4L] - %m%n%exception" charset="UTF-8"/>
+        </Console>
+
+        <RollingFile name="RollingFile"
+                     fileName="./logs/${log-name}.log"
+                     filePattern="./logs/$${date:yyyy-MM}/${log-name}-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="5" compressionLevel="9"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- LOG everything at INFO level -->
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+
+</Configuration>
